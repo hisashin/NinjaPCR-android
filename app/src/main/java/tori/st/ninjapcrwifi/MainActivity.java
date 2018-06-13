@@ -36,15 +36,12 @@ public class MainActivity extends AppCompatActivity implements NsdManager.Discov
     public class WebAppInterface {
         Context mContext;
 
-        /** Instantiate the interface and set the context */
         WebAppInterface(Context c) {
             mContext = c;
         }
 
-        /** Show a toast from the web page */
         @JavascriptInterface
         public void resolveHost(String host) {
-            Toast.makeText(mContext, host, Toast.LENGTH_SHORT).show();
             findDevice(host);
         }
     }
@@ -53,8 +50,8 @@ public class MainActivity extends AppCompatActivity implements NsdManager.Discov
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         mWebView = (WebView)findViewById(R.id.webView);
-        //mWebView.loadUrl("file:///android_asset/index.html");
         mWebView.loadUrl("http://ninjapcr.tori.st/ja/console/index.html");
         mWebView.getSettings().setDomStorageEnabled(true);
         mWebView.addJavascriptInterface(new WebAppInterface(this), "Android");
@@ -64,10 +61,9 @@ public class MainActivity extends AppCompatActivity implements NsdManager.Discov
 
     }
     private void findDevice (String hostName) {
-        // TODO
         mNsdManager.discoverServices(
                 SERVICE_TYPE, NsdManager.PROTOCOL_DNS_SD, this);
-
+        // TODO timeout
     }
 
     @Override
