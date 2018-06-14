@@ -4,8 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
+import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity implements MDNSResolver.MDNSResolverListener {
 
@@ -14,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements MDNSResolver.MDNS
 
     private WebView mWebView;
     private MDNSResolver mResolver;
+    private ImageButton reloadButton;
     @SuppressLint("JavascriptInterface")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,13 +25,22 @@ public class MainActivity extends AppCompatActivity implements MDNSResolver.MDNS
         setContentView(R.layout.activity_main);
 
         mWebView = (WebView)findViewById(R.id.webView);
-        mWebView.loadUrl("http://ninjapcr.tori.st/ja/console/index.html");
-        mWebView.getSettings().setDomStorageEnabled(true);
-        mWebView.addJavascriptInterface(new WebAppInterface(this), "Android");
-        mWebView.getSettings().setJavaScriptEnabled(true);
+        loadWebUI();
 
         mResolver = new MDNSResolver(this);
         mResolver.setListener(this);
+
+        reloadButton = (ImageButton)findViewById(R.id.reloadButton);
+        reloadButton.setOnClickListener((View v)->{
+            loadWebUI();
+        });
+    }
+
+    private void loadWebUI() {
+        mWebView.loadUrl("http://ninjapcr.tori.st/ja/console/index.html");
+        mWebView.addJavascriptInterface(new WebAppInterface(this), "Android");
+        mWebView.getSettings().setDomStorageEnabled(true);
+        mWebView.getSettings().setJavaScriptEnabled(true);
     }
 
     public class WebAppInterface {
