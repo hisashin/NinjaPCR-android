@@ -5,15 +5,10 @@ import android.content.Context;
 import android.net.nsd.NsdManager;
 import android.net.nsd.NsdServiceInfo;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
-import android.widget.Toast;
-
-import java.net.ServerSocket;
-import java.net.Socket;
 
 public class MainActivity extends AppCompatActivity implements NsdManager.DiscoveryListener, NsdManager.ResolveListener {
 
@@ -23,16 +18,9 @@ public class MainActivity extends AppCompatActivity implements NsdManager.Discov
     private WebView mWebView;
 
     private NsdManager mNsdManager;
-    private NsdServiceInfo mServiceInfo;
-    private boolean isDiscoveringServices = false;
 
     private static final String SERVICE_TYPE = "_http._tcp.";
     private static final String SERVICE_NAME = "ninjapcr";
-    private ServerSocket mServerSocket = null;
-    private int mLocalPort;
-    Thread runner = null;
-    Handler mHandler = new Handler();
-    private Socket mSocket;
     public class WebAppInterface {
         Context mContext;
 
