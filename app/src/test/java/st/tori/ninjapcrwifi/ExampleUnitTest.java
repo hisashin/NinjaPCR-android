@@ -1,4 +1,4 @@
-package tori.st.ninjapcrwifi;
+package st.tori.ninjapcrwifi;
 
 import org.junit.Test;
 

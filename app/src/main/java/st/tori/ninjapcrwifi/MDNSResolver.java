@@ -1,4 +1,4 @@
-package tori.st.ninjapcrwifi;
+package st.tori.ninjapcrwifi;
 
 import android.app.Activity;
 import android.content.Context;
